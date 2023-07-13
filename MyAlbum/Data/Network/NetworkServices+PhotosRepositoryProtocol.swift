@@ -5,7 +5,7 @@
 //  Created by Kiarash Vosough on 7/13/23.
 //
 
-import Foundation
+import Dependencies
 
 extension NetworkServices: PhotosRepositoryProtocol {
     
@@ -42,5 +42,22 @@ extension PhotoRequest: API {
         default:
             KeyValue.empty
         }
+    }
+}
+
+// MARK: - Dependency
+
+extension DependencyValues {
+    
+    var photosRepository: PhotosRepositoryProtocol {
+        get {
+            self[Key.self]
+        } set {
+            self[Key.self] = newValue
+        }
+    }
+    
+    private enum Key: DependencyKey {
+        static var liveValue: PhotosRepositoryProtocol { NetworkServices.shared }
     }
 }
