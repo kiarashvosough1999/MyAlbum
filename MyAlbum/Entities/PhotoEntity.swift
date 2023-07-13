@@ -9,10 +9,10 @@ import Foundation
 
 struct PhotoEntity: Identifiable {
     let id: Int
-    let albumID: Int
+    let albumId: Int
     let title: String
     let url: String
-    let thumbnailURL: URL
+    let thumbnailUrl: URL
 }
 
 extension PhotoEntity: Hashable {}

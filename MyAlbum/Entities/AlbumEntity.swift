@@ -7,7 +7,7 @@
 
 struct AlbumEntity: Identifiable {
     let id: Int
-    let userID: Int
+    let userId: Int
     let title: String
 }
 
