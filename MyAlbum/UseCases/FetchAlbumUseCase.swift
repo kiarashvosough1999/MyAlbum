@@ -24,3 +24,20 @@ extension FetchAlbumUseCase: FetchAlbumUseCaseProtocol {
         try await albumRepository.fetchAlbums()
     }
 }
+
+// MARK: - Dependency
+
+extension DependencyValues {
+    
+    var fetchAlbumUseCase: FetchAlbumUseCaseProtocol {
+        get {
+            self[Key.self]
+        } set {
+            self[Key.self] = newValue
+        }
+    }
+    
+    private enum Key: DependencyKey {
+        static var liveValue: FetchAlbumUseCaseProtocol { FetchAlbumUseCase() }
+    }
+}
