@@ -34,10 +34,8 @@ final class FetchAlbumUseCaseTests: XCTestCase, JSONLoader {
     }
 
     func testFetchingAlbumsUnSuccessful() async throws {
-        let albums = try loadAlbums()
-        
         try await withDependencies { values in
-            values.albumRepository = AlbumRepositoryStub(albums: albums)
+            values.albumRepository = AlbumRepositoryStub(error: ErrorStub.someError)
         } operation: {
             await XCTAssertThrowsError(try await sut.fetchAlbums())
         }
