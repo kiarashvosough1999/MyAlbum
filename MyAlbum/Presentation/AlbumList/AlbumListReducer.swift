@@ -18,12 +18,14 @@ struct AlbumListReducer: ReducerProtocol {
         var albumsToShow: [AlbumWithImageEntity] {
             guard filteredUserId.isEmpty == false, let userId = Int(filteredUserId) else { return albums }
             return albums
+                .lazy
                 .filter { $0.userId == userId }
                 .sorted { $0.userId < $1.userId }
         }
         
         var albumsGroupedByUserId: [[AlbumWithImageEntity]] {
             return Dictionary(grouping: albumsToShow, by: \.userId)
+                .lazy
                 .sorted(by: { $0.key < $1.key })
                 .map { $0.value }
         }

@@ -35,6 +35,7 @@
 		DE6537D02A609115005A66AE /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6537CF2A609115005A66AE /* FirstAppear.swift */; };
 		DE6537D32A609163005A66AE /* SectionizedAlbumList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6537D22A609163005A66AE /* SectionizedAlbumList.swift */; };
 		DE6537D52A609240005A66AE /* AllAlbumListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6537D42A609240005A66AE /* AllAlbumListView.swift */; };
+		DE692D202A60A58000A3F8E3 /* FetchPhotoUseCaseStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE692D1F2A60A58000A3F8E3 /* FetchPhotoUseCaseStub.swift */; };
 		DE7F5BA82A60986000D16309 /* FetchImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7F5BA72A60986000D16309 /* FetchImageRepository.swift */; };
 		DE7F5BAA2A6098A800D16309 /* NetworkServices+LoadImageDataRespositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7F5BA92A6098A800D16309 /* NetworkServices+LoadImageDataRespositoryProtocol.swift */; };
 		DE7F5BAC2A60993600D16309 /* AlbumItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7F5BAB2A60993600D16309 /* AlbumItemView.swift */; };
@@ -49,7 +50,6 @@
 		DEC54EB62A6017C3003018B4 /* MyAlbumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC54EB52A6017C3003018B4 /* MyAlbumApp.swift */; };
 		DEC54EBA2A6017C4003018B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC54EB92A6017C4003018B4 /* Assets.xcassets */; };
 		DEC54EBD2A6017C4003018B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC54EBC2A6017C4003018B4 /* Preview Assets.xcassets */; };
-		DEC54EC72A6017C4003018B4 /* MyAlbumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC54EC62A6017C4003018B4 /* MyAlbumTests.swift */; };
 		DEC54ED12A6017C4003018B4 /* MyAlbumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC54ED02A6017C4003018B4 /* MyAlbumUITests.swift */; };
 		DEC54ED32A6017C4003018B4 /* MyAlbumUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC54ED22A6017C4003018B4 /* MyAlbumUITestsLaunchTests.swift */; };
 		DEC54EE12A60181E003018B4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = DEC54EE02A60181E003018B4 /* ComposableArchitecture */; };
@@ -102,6 +102,7 @@
 		DE6537CF2A609115005A66AE /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
 		DE6537D22A609163005A66AE /* SectionizedAlbumList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionizedAlbumList.swift; sourceTree = "<group>"; };
 		DE6537D42A609240005A66AE /* AllAlbumListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAlbumListView.swift; sourceTree = "<group>"; };
+		DE692D1F2A60A58000A3F8E3 /* FetchPhotoUseCaseStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPhotoUseCaseStub.swift; sourceTree = "<group>"; };
 		DE7F5BA72A60986000D16309 /* FetchImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageRepository.swift; sourceTree = "<group>"; };
 		DE7F5BA92A6098A800D16309 /* NetworkServices+LoadImageDataRespositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkServices+LoadImageDataRespositoryProtocol.swift"; sourceTree = "<group>"; };
 		DE7F5BAB2A60993600D16309 /* AlbumItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumItemView.swift; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 		DEC54EB92A6017C4003018B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEC54EBC2A6017C4003018B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DEC54EC22A6017C4003018B4 /* MyAlbumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyAlbumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DEC54EC62A6017C4003018B4 /* MyAlbumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumTests.swift; sourceTree = "<group>"; };
 		DEC54ECC2A6017C4003018B4 /* MyAlbumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyAlbumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC54ED02A6017C4003018B4 /* MyAlbumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumUITests.swift; sourceTree = "<group>"; };
 		DEC54ED22A6017C4003018B4 /* MyAlbumUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -197,6 +197,7 @@
 			children = (
 				DE37A0DE2A603EC70060952E /* AlbumRepositoryStub.swift */,
 				DE38241F2A60813E007FEB9D /* PhotosRepositoryStub.swift */,
+				DE692D1F2A60A58000A3F8E3 /* FetchPhotoUseCaseStub.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -383,7 +384,6 @@
 				DE38240E2A607A6B007FEB9D /* Mocks */,
 				DE37A0DD2A603EB30060952E /* Stubs */,
 				DE37A0D82A603DFB0060952E /* UseCasesTests */,
-				DEC54EC62A6017C4003018B4 /* MyAlbumTests.swift */,
 			);
 			path = MyAlbumTests;
 			sourceTree = "<group>";
@@ -579,8 +579,8 @@
 				DE37A0DC2A603E930060952E /* FetchAlbumUseCaseTests.swift in Sources */,
 				DE37A0DF2A603EC70060952E /* AlbumRepositoryStub.swift in Sources */,
 				DE3824192A607ECB007FEB9D /* ErrorStub.swift in Sources */,
+				DE692D202A60A58000A3F8E3 /* FetchPhotoUseCaseStub.swift in Sources */,
 				DE38241B2A607F1A007FEB9D /* XCAssert.swift in Sources */,
-				DEC54EC72A6017C4003018B4 /* MyAlbumTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
