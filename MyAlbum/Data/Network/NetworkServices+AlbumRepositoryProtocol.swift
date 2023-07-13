@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dependencies
 
 extension NetworkServices: AlbumRepositoryProtocol {
 
@@ -27,4 +28,21 @@ extension AlbumRequest: API {
     var gateway: GateWays { .base }
     var method: HTTPMethod { .get }
     var route: String { "albums" }
+}
+
+// MARK: - Dependency
+
+extension DependencyValues {
+    
+    var albumRepository: AlbumRepositoryProtocol {
+        get {
+            self[Key.self]
+        } set {
+            self[Key.self] = newValue
+        }
+    }
+    
+    private enum Key: DependencyKey {
+        static var liveValue: AlbumRepositoryProtocol { NetworkServices.shared }
+    }
 }
