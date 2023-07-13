@@ -20,7 +20,7 @@ struct AlbumListView: View {
         WithViewStore(store) { viewStore in
             Group {
                 if viewStore.sectionByUsers == false {
-                    AllAlbumListView(albums: viewStore.albumsToShow)
+                    AllAlbumListView(albums: viewStore.filteredAlbums)
                         .equatable()
                 } else {
                     SectionizedAlbumList(albums: viewStore.albumsGroupedByUserId)
@@ -28,12 +28,21 @@ struct AlbumListView: View {
                 }
             }
             .navigationTitle("Albums")
-            .searchable(text: viewStore.$filteredUserId, prompt: "Enter User ID")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Button(viewStore.sectionByUsers ? "No Section" : "Section By Users") {
                             viewStore.send(.sectionByUsersChanged)
+                        }
+                        Button("No User Id Filter") {
+                            viewStore.send(.set(\.$filteredUserId, nil))
+                        }
+                        Menu("User IDs") {
+                            ForEach(viewStore.userIds, id: \.self) { id in
+                                Button("Filter By User Id \(id)") {
+                                    viewStore.send(.set(\.$filteredUserId, id))
+                                }
+                            }
                         }
                     } label: {
                         Label("user", systemImage: "line.3.horizontal.decrease.circle")

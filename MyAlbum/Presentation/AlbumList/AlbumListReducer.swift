@@ -9,25 +9,29 @@ import ComposableArchitecture
 import Dependencies
 
 struct AlbumListReducer: ReducerProtocol {
-    
+
     struct State: Equatable {
         @BindingState fileprivate var albums: [AlbumWithImageEntity] = []
-        @BindingState var filteredUserId: String = ""
+        @BindingState var filteredUserId: Int?
         var sectionByUsers: Bool = false
-    
-        var albumsToShow: [AlbumWithImageEntity] {
-            guard filteredUserId.isEmpty == false, let userId = Int(filteredUserId) else { return albums }
+
+        var filteredAlbums: [AlbumWithImageEntity] {
+            guard let filteredUserId else { return albums }
             return albums
                 .lazy
-                .filter { $0.userId == userId }
+                .filter { $0.userId == filteredUserId }
                 .sorted { $0.userId < $1.userId }
         }
         
         var albumsGroupedByUserId: [[AlbumWithImageEntity]] {
-            return Dictionary(grouping: albumsToShow, by: \.userId)
+            return Dictionary(grouping: filteredAlbums, by: \.userId)
                 .lazy
                 .sorted(by: { $0.key < $1.key })
                 .map { $0.value }
+        }
+
+        var userIds: [Int] {
+            Array(Set(albums.map(\.userId))).sorted()
         }
     }
 
