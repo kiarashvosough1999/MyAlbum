@@ -26,11 +26,12 @@ extension FetchAlbumUseCase: FetchAlbumUseCaseProtocol {
         let albums = try await albumRepository.fetchAlbums()
 
         return try await withThrowingTaskGroup(of: AlbumWithImageEntity.self, returning: [AlbumWithImageEntity].self) { group in
-            
+            let mapper = AlbumEntityToAlbumWithImageEntityMapper()
             for album in albums {
                 group.addTask {
                     let photo = try await fetchPhotoUseCase.fetchPhoto(albumId: album.id)
-                    return AlbumWithImageEntity(id: album.id, userId: album.userId, title: album.title, thumbnailUrl: photo.thumbnailUrl)
+                    let context = AlbumEntityToAlbumWithImageEntityMapper.Context(thumbnailUrl: photo.thumbnailUrl)
+                    return mapper.map(album, context: context)
                 }
             }
             

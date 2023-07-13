@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import XCTestDynamicOverlay
 
 @main
 struct MyAlbumApp: App {
@@ -15,7 +16,9 @@ struct MyAlbumApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView(store: store)
+            if !_XCTIsTesting {
+                RootView(store: store)
+            }
         }
     }
 }
