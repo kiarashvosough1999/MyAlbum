@@ -38,7 +38,7 @@ struct AlbumListReducer: ReducerProtocol {
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case onAppear
-        case albumLoaded([AlbumWithImageEntity])
+        case albumLoaded(albums: [AlbumWithImageEntity])
         case sectionByUsersChanged
     }
 
@@ -50,7 +50,7 @@ struct AlbumListReducer: ReducerProtocol {
             case .onAppear:
                 return .run { send in
                     let albums = try await fetchAlbumUseCase.fetchAlbums()
-                    await send(.albumLoaded(albums))
+                    await send(.albumLoaded(albums: albums))
                 }
             case .albumLoaded(let albums):
                 state.albums = albums
