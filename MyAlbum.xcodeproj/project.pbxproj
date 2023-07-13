@@ -14,6 +14,8 @@
 		DE03697D2A60195E000A2FB8 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0369762A60195E000A2FB8 /* API.swift */; };
 		DE03697E2A60195E000A2FB8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0369772A60195E000A2FB8 /* NetworkError.swift */; };
 		DE03697F2A60195E000A2FB8 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0369782A60195E000A2FB8 /* NetworkServices.swift */; };
+		DEA140A92A60233A00E555C7 /* AlbumEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA140A82A60233A00E555C7 /* AlbumEntity.swift */; };
+		DEA140AB2A6023AE00E555C7 /* PhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA140AA2A6023AE00E555C7 /* PhotoEntity.swift */; };
 		DEC54EB62A6017C3003018B4 /* MyAlbumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC54EB52A6017C3003018B4 /* MyAlbumApp.swift */; };
 		DEC54EBA2A6017C4003018B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC54EB92A6017C4003018B4 /* Assets.xcassets */; };
 		DEC54EBD2A6017C4003018B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC54EBC2A6017C4003018B4 /* Preview Assets.xcassets */; };
@@ -48,6 +50,8 @@
 		DE0369762A60195E000A2FB8 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DE0369772A60195E000A2FB8 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DE0369782A60195E000A2FB8 /* NetworkServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		DEA140A82A60233A00E555C7 /* AlbumEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumEntity.swift; sourceTree = "<group>"; };
+		DEA140AA2A6023AE00E555C7 /* PhotoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEntity.swift; sourceTree = "<group>"; };
 		DEC54EB22A6017C3003018B4 /* MyAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC54EB52A6017C3003018B4 /* MyAlbumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumApp.swift; sourceTree = "<group>"; };
 		DEC54EB92A6017C4003018B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,6 +119,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		DEA140A72A6022E200E555C7 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DEA140A82A60233A00E555C7 /* AlbumEntity.swift */,
+				DEA140AA2A6023AE00E555C7 /* PhotoEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		DEC54EA92A6017C3003018B4 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +151,7 @@
 		DEC54EB42A6017C3003018B4 /* MyAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				DEA140A72A6022E200E555C7 /* Entities */,
 				DE03696F2A60194A000A2FB8 /* Data */,
 				DEC54EB52A6017C3003018B4 /* MyAlbumApp.swift */,
 				DEC54EB92A6017C4003018B4 /* Assets.xcassets */,
@@ -308,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE0369792A60195E000A2FB8 /* StatusCode.swift in Sources */,
+				DEA140A92A60233A00E555C7 /* AlbumEntity.swift in Sources */,
 				DE03697E2A60195E000A2FB8 /* NetworkError.swift in Sources */,
 				DEC54EB62A6017C3003018B4 /* MyAlbumApp.swift in Sources */,
 				DE03697B2A60195E000A2FB8 /* URLSession++APITask.swift in Sources */,
@@ -315,6 +330,7 @@
 				DE03697D2A60195E000A2FB8 /* API.swift in Sources */,
 				DE03697F2A60195E000A2FB8 /* NetworkServices.swift in Sources */,
 				DE03697A2A60195E000A2FB8 /* GateWays.swift in Sources */,
+				DEA140AB2A6023AE00E555C7 /* PhotoEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
