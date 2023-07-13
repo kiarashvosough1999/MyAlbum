@@ -22,6 +22,11 @@
 		DE3824172A607B15007FEB9D /* JSONLoader++Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3824162A607B15007FEB9D /* JSONLoader++Albums.swift */; };
 		DE3824192A607ECB007FEB9D /* ErrorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3824182A607ECB007FEB9D /* ErrorStub.swift */; };
 		DE38241B2A607F1A007FEB9D /* XCAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE38241A2A607F1A007FEB9D /* XCAssert.swift */; };
+		DE38241E2A60802D007FEB9D /* FetchPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE38241D2A60802D007FEB9D /* FetchPhotoUseCase.swift */; };
+		DE3824202A60813E007FEB9D /* PhotosRepositoryStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE38241F2A60813E007FEB9D /* PhotosRepositoryStub.swift */; };
+		DE3824232A6081A6007FEB9D /* photos.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3824222A6081A6007FEB9D /* photos.json */; };
+		DE3824252A6081B4007FEB9D /* JSONLoader++Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3824242A6081B4007FEB9D /* JSONLoader++Photos.swift */; };
+		DE3824272A608214007FEB9D /* FetchPhotosUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3824262A608214007FEB9D /* FetchPhotosUseCaseTests.swift */; };
 		DEA140A92A60233A00E555C7 /* AlbumEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA140A82A60233A00E555C7 /* AlbumEntity.swift */; };
 		DEA140AB2A6023AE00E555C7 /* PhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA140AA2A6023AE00E555C7 /* PhotoEntity.swift */; };
 		DEA140B42A60253E00E555C7 /* AlbumRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA140B32A60253E00E555C7 /* AlbumRepositoryProtocol.swift */; };
@@ -70,6 +75,12 @@
 		DE3824162A607B15007FEB9D /* JSONLoader++Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONLoader++Albums.swift"; sourceTree = "<group>"; };
 		DE3824182A607ECB007FEB9D /* ErrorStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStub.swift; sourceTree = "<group>"; };
 		DE38241A2A607F1A007FEB9D /* XCAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCAssert.swift; sourceTree = "<group>"; };
+		DE38241C2A607FBC007FEB9D /* MyAlbum.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MyAlbum.xctestplan; sourceTree = "<group>"; };
+		DE38241D2A60802D007FEB9D /* FetchPhotoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPhotoUseCase.swift; sourceTree = "<group>"; };
+		DE38241F2A60813E007FEB9D /* PhotosRepositoryStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosRepositoryStub.swift; sourceTree = "<group>"; };
+		DE3824222A6081A6007FEB9D /* photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = photos.json; sourceTree = "<group>"; };
+		DE3824242A6081B4007FEB9D /* JSONLoader++Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONLoader++Photos.swift"; sourceTree = "<group>"; };
+		DE3824262A608214007FEB9D /* FetchPhotosUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPhotosUseCaseTests.swift; sourceTree = "<group>"; };
 		DEA140A82A60233A00E555C7 /* AlbumEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumEntity.swift; sourceTree = "<group>"; };
 		DEA140AA2A6023AE00E555C7 /* PhotoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEntity.swift; sourceTree = "<group>"; };
 		DEA140B32A60253E00E555C7 /* AlbumRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -149,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				DE37A0DB2A603E930060952E /* FetchAlbumUseCaseTests.swift */,
+				DE3824262A608214007FEB9D /* FetchPhotosUseCaseTests.swift */,
 			);
 			path = UseCasesTests;
 			sourceTree = "<group>";
@@ -157,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				DE37A0DE2A603EC70060952E /* AlbumRepositoryStub.swift */,
+				DE38241F2A60813E007FEB9D /* PhotosRepositoryStub.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -173,6 +186,7 @@
 		DE38240F2A607A6E007FEB9D /* JSONs */ = {
 			isa = PBXGroup;
 			children = (
+				DE3824212A60819F007FEB9D /* Photos */,
 				DE3824152A607B0B007FEB9D /* Albums */,
 			);
 			path = JSONs;
@@ -196,6 +210,15 @@
 			path = Albums;
 			sourceTree = "<group>";
 		};
+		DE3824212A60819F007FEB9D /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				DE3824222A6081A6007FEB9D /* photos.json */,
+				DE3824242A6081B4007FEB9D /* JSONLoader++Photos.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
 		DEA140A72A6022E200E555C7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +233,7 @@
 			children = (
 				DEA140B22A60252900E555C7 /* RepositoryProtocols */,
 				DE37A0D92A603E1E0060952E /* FetchAlbumUseCase.swift */,
+				DE38241D2A60802D007FEB9D /* FetchPhotoUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -226,6 +250,7 @@
 		DEC54EA92A6017C3003018B4 = {
 			isa = PBXGroup;
 			children = (
+				DE38241C2A607FBC007FEB9D /* MyAlbum.xctestplan */,
 				DEC54EB42A6017C3003018B4 /* MyAlbum */,
 				DEC54EC52A6017C4003018B4 /* MyAlbumTests */,
 				DEC54ECF2A6017C4003018B4 /* MyAlbumUITests */,
@@ -404,6 +429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3824232A6081A6007FEB9D /* photos.json in Resources */,
 				DE3824142A607AFF007FEB9D /* albums.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +463,7 @@
 				DE37A0DA2A603E1E0060952E /* FetchAlbumUseCase.swift in Sources */,
 				DEA140AB2A6023AE00E555C7 /* PhotoEntity.swift in Sources */,
 				DEA140B82A60265D00E555C7 /* NetworkServices+AlbumRepositoryProtocol.swift in Sources */,
+				DE38241E2A60802D007FEB9D /* FetchPhotoUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +471,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3824202A60813E007FEB9D /* PhotosRepositoryStub.swift in Sources */,
+				DE3824272A608214007FEB9D /* FetchPhotosUseCaseTests.swift in Sources */,
+				DE3824252A6081B4007FEB9D /* JSONLoader++Photos.swift in Sources */,
 				DE3824122A607A94007FEB9D /* JSONLoader.swift in Sources */,
 				DE3824172A607B15007FEB9D /* JSONLoader++Albums.swift in Sources */,
 				DE37A0DC2A603E930060952E /* FetchAlbumUseCaseTests.swift in Sources */,
