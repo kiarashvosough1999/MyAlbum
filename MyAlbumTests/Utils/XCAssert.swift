@@ -16,7 +16,7 @@ func XCTAssertThrowsError<T>(
 ) async {
     do {
         _ = try await expression()
-        XCTAssert(true, file: file, line: line)
+        XCTAssert(false, file: file, line: line)
     } catch {
         errorHandler(error)
     }
