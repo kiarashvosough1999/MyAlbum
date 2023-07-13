@@ -30,7 +30,7 @@ extension FetchPhotoUseCase: FetchPhotoUseCaseProtocol {
     }
 
     func fetchPhoto(albumId: Int) async throws -> PhotoEntity {
-        let photoId = photosInAlbumCount * albumId
+        let photoId = photosInAlbumCount * (albumId - 1) + 1
         return try await photosRepository.fetchPhoto(albumId: albumId, photoId: photoId)
     }
 }
