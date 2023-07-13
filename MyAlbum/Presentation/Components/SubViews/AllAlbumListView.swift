@@ -9,16 +9,19 @@ import SwiftUI
 
 struct AllAlbumListView: View {
 
-    private let albums: [AlbumEntity]
+    private let albums: [AlbumWithImageEntity]
     
-    init(albums: [AlbumEntity]) {
+    init(albums: [AlbumWithImageEntity]) {
         self.albums = albums
     }
     
     var body: some View {
-        List {
-            ForEach(albums) { album in
-                Text(album.title)
+        ScrollView {
+            LazyVStack {
+                ForEach(albums) { album in
+                    AlbumItemView(model: album)
+                        .equatable()
+                }
             }
         }
     }

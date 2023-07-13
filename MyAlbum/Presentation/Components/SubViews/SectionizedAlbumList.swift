@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SectionizedAlbumList: View {
 
-    private let albums: [[AlbumEntity]]
+    private let albums: [[AlbumWithImageEntity]]
     
-    init(albums: [[AlbumEntity]]) {
+    init(albums: [[AlbumWithImageEntity]]) {
         self.albums = albums
     }
     
@@ -21,7 +21,8 @@ struct SectionizedAlbumList: View {
                 if let userId = albumByUserId.first?.userId {
                     Section("User Id: \(userId)") {
                         ForEach(albumByUserId) { album in
-                            Text(album.title)
+                            AlbumItemView(model: album)
+                                .equatable()
                         }
                     }
                 }
