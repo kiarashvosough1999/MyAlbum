@@ -30,6 +30,12 @@ struct SectionizedAlbumList: View {
     }
 }
 
+extension SectionizedAlbumList: Equatable {
+    static func == (lhs: SectionizedAlbumList, rhs: SectionizedAlbumList) -> Bool {
+        lhs.albums == rhs.albums
+    }
+}
+
 struct SectionizedAlbumList_Previews: PreviewProvider {
     static var previews: some View {
         SectionizedAlbumList(albums: [])

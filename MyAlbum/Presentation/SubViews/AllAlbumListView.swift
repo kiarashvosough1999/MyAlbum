@@ -24,6 +24,12 @@ struct AllAlbumListView: View {
     }
 }
 
+extension AllAlbumListView: Equatable {
+    static func == (lhs: AllAlbumListView, rhs: AllAlbumListView) -> Bool {
+        lhs.albums == rhs.albums
+    }
+}
+
 struct AllAlbumListView_Preview: PreviewProvider {
     static var previews: some View {
         AllAlbumListView(albums: [])
