@@ -52,7 +52,7 @@ final class FetchPhotosUseCaseTests: XCTestCase, JSONLoader {
     
     func testFetchingPhotoSuccessful() async throws {
         let albumId = 1
-        let photoId = 50
+        let photoId = 1
         let photo = try loadPhotos().first!
         let photosRepository = PhotosRepositoryStub(photo: photo)
 
@@ -71,7 +71,7 @@ final class FetchPhotosUseCaseTests: XCTestCase, JSONLoader {
 
     func testFetchingPhotoUnSuccessful() async throws {
         let albumId = 1
-        let photoId = 50
+        let photoId = 1
         let photosRepository = PhotosRepositoryStub(error: ErrorStub.someError)
 
         try await withDependencies { values in
