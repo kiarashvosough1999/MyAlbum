@@ -17,7 +17,7 @@ final class NetworkServices {
     let session: URLSession
     let cache: URLCache
     
-    init(session: URLSession = URLSession(configuration: .default)) {
+    init(session: URLSession = URLSession.shared) {
         self.session = session
         self.cache = URLCache(
             memoryCapacity: NetworkServices.cacheMemoryCapacity,
