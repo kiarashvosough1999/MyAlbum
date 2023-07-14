@@ -11,7 +11,7 @@ import Dependencies
 
 protocol FetchPhotoUseCaseProtocol {
     func fetchPhotos(albumId: Int) async throws -> [PhotoEntity]
-    func fetchPhoto(albumId: Int) async throws -> PhotoEntity
+    func fetchRandomPhoto(albumId: Int) async throws -> PhotoEntity
 }
 
 // MARK: - Implementation
@@ -30,10 +30,12 @@ extension FetchPhotoUseCase: FetchPhotoUseCaseProtocol {
             .fetchPhotos(albumId: albumId)
     }
 
-    func fetchPhoto(albumId: Int) async throws -> PhotoEntity {
+    func fetchRandomPhoto(albumId: Int) async throws -> PhotoEntity {
         /// To get specific phot based on albumId, we should calculate the photo id which is depen on `albumId`
         ///  as there are 50 image in each album
-        let photoId = photosInAlbumCount * (albumId - 1) + 1
+        let startPhotoId = photosInAlbumCount * (albumId - 1) + 1
+        let endPhotoId = startPhotoId + photosInAlbumCount - 1
+        let photoId = Int.random(in: startPhotoId...endPhotoId)
         return try await photosRepository.fetchPhoto(albumId: albumId, photoId: photoId)
     }
 }
