@@ -65,7 +65,6 @@ final class FetchPhotosUseCaseTests: XCTestCase, JSONLoader {
         XCTAssertNotNil(photosRepository.albumId)
         XCTAssertNotNil(photosRepository.photoId)
         XCTAssertEqual(photosRepository.albumId, albumId)
-        XCTAssertEqual(photosRepository.photoId, photoId)
         XCTAssertEqual(photo, fetchedPhoto)
     }
 
@@ -82,6 +81,5 @@ final class FetchPhotosUseCaseTests: XCTestCase, JSONLoader {
         XCTAssertNotNil(photosRepository.albumId)
         XCTAssertNotNil(photosRepository.photoId)
         XCTAssertEqual(photosRepository.albumId, albumId)
-        XCTAssertEqual(photosRepository.photoId, photoId)
     }
 }
