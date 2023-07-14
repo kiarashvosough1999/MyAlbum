@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 
+/// Serve as a entry point and constrcut Navigation System
 struct RootView: View {
 
     private let store: StoreOf<RootReducer>
@@ -17,7 +18,7 @@ struct RootView: View {
     }
 
     var body: some View {
-        NavigationStackStore(store.scope(state: \.path, action: { .path($0) })) {
+        NavigationStackStore(store.scope(state: \.path, action: RootReducer.Action.path(path:))) {
             AlbumListView(store: store.scope(state: \.albumList, action: RootReducer.Action.albumList(action:)))
         } destination: { (state: Path.State) in
             switch state {

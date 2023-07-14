@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Gateways of application to send and receive data
 internal enum GateWays: String {
     case base = "https://jsonplaceholder.typicode.com"
 }
@@ -14,14 +15,7 @@ internal enum GateWays: String {
 extension GateWays {
 
     func get() throws -> URL {
-        return try URL(gateway: self)
-    }
-}
-
-fileprivate extension URL {
-
-    init<G>(gateway: G) throws where G: RawRepresentable, G.RawValue == String {
-        guard let url = URL(string: gateway.rawValue) else { throw NetworkError.apiURLException }
-        self = url
+        guard let url = URL(string: rawValue) else { throw NetworkError.apiURLException }
+        return url
     }
 }

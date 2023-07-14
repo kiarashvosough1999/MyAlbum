@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Fetch Albums from a Repository
 protocol AlbumRepositoryProtocol {
     func fetchAlbums() async throws -> [AlbumEntity]
 }

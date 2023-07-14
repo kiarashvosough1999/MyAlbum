@@ -23,11 +23,13 @@ struct AlbumListReducer: ReducerProtocol {
                 .sorted { $0.userId < $1.userId }
         }
         
+        /// Data Source used for ungrouped albums
         var unGroupedAlbums: [AllAlbumListViewModel] {
             let mapper = AlbumWithImageEntityToAllAlbumListViewModelMapper()
             return filteredAlbums.map { mapper.map($0) }
         }
         
+        /// Data Source used for grouped albums based on userid
         var groupedAlbumsByUserId: [[SectionizedAlbumListViewModel]] {
             let mapper = AlbumWithImageEntityToSectionizedAlbumListViewModel()
             return Dictionary(grouping: filteredAlbums, by: \.userId)
@@ -37,6 +39,7 @@ struct AlbumListReducer: ReducerProtocol {
                 .map { $0.map { mapper.map($0) } }
         }
 
+        /// Data Source used for filtering based on userId
         var userIds: [Int] {
             Array(Set(albums.map(\.userId))).sorted()
         }

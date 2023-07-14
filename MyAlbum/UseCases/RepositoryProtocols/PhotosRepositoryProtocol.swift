@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Fetch Photos from a Repository
 protocol PhotosRepositoryProtocol {
     func fetchPhotos(albumId: Int) async throws -> [PhotoEntity]
     func fetchPhoto(albumId: Int, photoId: Int) async throws -> PhotoEntity

@@ -16,6 +16,7 @@ struct MyAlbumApp: App {
 
     var body: some Scene {
         WindowGroup {
+            // Prevent UI Startup On Unit Testing
             if !_XCTIsTesting {
                 RootView(store: store)
             }

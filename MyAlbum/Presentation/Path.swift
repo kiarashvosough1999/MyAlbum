@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 
+/// This Reducer Act as a Router in Navigation System
 struct Path: ReducerProtocol {
     enum State {
         case showPhotos(photos: PhotosListReducer.State)
