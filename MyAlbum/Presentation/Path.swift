@@ -9,14 +9,14 @@ import ComposableArchitecture
 
 struct Path: ReducerProtocol {
     enum State {
-        case showPhotos(AlbumListReducer.State)
+        case showPhotos(photos: PhotosListReducer.State)
     }
     enum Action {
-        case showPhotos(AlbumListReducer.Action)
+        case showPhotos(photos: PhotosListReducer.Action)
     }
     var body: some ReducerProtocolOf<Self> {
         Scope(state: /State.showPhotos, action: /Action.showPhotos) {
-            AlbumListReducer()
+            PhotosListReducer()
         }
     }
 }
