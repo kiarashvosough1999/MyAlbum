@@ -19,6 +19,11 @@ jobs:
       continue-on-error: false
       run: |
         xcodebuild -scheme MyAlbum -destination '${{ matrix.destination }}' build
+        
+    - name: Test On ${{ matrix.name }}
+      continue-on-error: false
+      run: |
+        xcodebuild -scheme MyAlbum -destination '${{ matrix.destination }}' test
     
     strategy:
       fail-fast: false
