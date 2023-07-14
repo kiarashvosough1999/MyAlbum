@@ -34,10 +34,13 @@ final class AlbumListReducerTests: XCTestCase, JSONLoader {
         let photo = try loadPhotos().first!
         let url = photo.thumbnailUrl
 
-        let mapper = AlbumEntityToAlbumWithImageEntityMapper()
+        let albumEntityToAlbumWithImageEntityMapper = AlbumEntityToAlbumWithImageEntityMapper()
         let context = AlbumEntityToAlbumWithImageEntityMapper.Context(thumbnailUrl: url)
-        let albumsWithImage = albums.map { mapper.map($0, context: context) }
-
+        let albumsWithImage = albums.map { albumEntityToAlbumWithImageEntityMapper.map($0, context: context) }
+        
+        let albumWithImageEntityToAllAlbumListViewModelMapper = AlbumWithImageEntityToAllAlbumListViewModelMapper()
+        let viewmodel = albumsWithImage.map { albumWithImageEntityToAllAlbumListViewModelMapper.map($0) }
+        
         await store.withDependencies { values in
             values.fetchAlbumUseCase = FetchAlbumUseCaseStub(albums: albumsWithImage)
             values.fetchPhotoUseCase = FetchPhotoUseCaseStub(photo: photo)
@@ -45,7 +48,7 @@ final class AlbumListReducerTests: XCTestCase, JSONLoader {
             await store.send(.onAppear)
             await store.finish(timeout: 10*NSEC_PER_SEC)
             await store.receive(/AlbumListReducer.Action.albumLoaded(albums:))
-            XCTAssertEqual(store.state.filteredAlbums, albumsWithImage)
+            XCTAssertEqual(store.state.unGroupedAlbums, viewmodel)
             XCTAssertEqual(store.state.userIds, userIds)
         }
     }
@@ -62,6 +65,9 @@ final class AlbumListReducerTests: XCTestCase, JSONLoader {
         let albumsWithImage = albums.map { mapper.map($0, context: context) }
         let filteredAlbumsWithImage = albumsWithImage.filter { $0.userId == userId }
         
+        let albumWithImageEntityToAllAlbumListViewModelMapper = AlbumWithImageEntityToAllAlbumListViewModelMapper()
+        let viewmodel = filteredAlbumsWithImage.map { albumWithImageEntityToAllAlbumListViewModelMapper.map($0) }
+
         await store.withDependencies { values in
             values.fetchAlbumUseCase = FetchAlbumUseCaseStub(albums: albumsWithImage)
             values.fetchPhotoUseCase = FetchPhotoUseCaseStub(photo: photo)
@@ -69,7 +75,7 @@ final class AlbumListReducerTests: XCTestCase, JSONLoader {
             await store.send(.onAppear)
             await store.send(.set(\.$filteredUserId, userId))
             await store.finish(timeout: 10*NSEC_PER_SEC)
-            XCTAssertEqual(store.state.filteredAlbums, filteredAlbumsWithImage)
+            XCTAssertEqual(store.state.unGroupedAlbums, viewmodel)
         }
     }
 
