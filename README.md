@@ -38,9 +38,11 @@ User can:
 - [x] Language: Swift 5
 - [x] SwiftUI
 - [x] Composable-Architecture
+- [x] Github-Action
 
 ## Features and Bonuses
 
+- [x] Build and Test on Github Action.
 - [x] The ability to filter Albums by userId.
 - [x] An album has a random cover image from the photos within it.
 - [x] When browsing an album and clicking on an image thumbnail (photos.thumbnailUrl), the user can view the larger version of the image (photos.url).
