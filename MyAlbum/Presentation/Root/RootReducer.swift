@@ -15,7 +15,7 @@ struct RootReducer: ReducerProtocol {
     }
     
     enum Action {
-        case path(StackAction<Path.State, Path.Action>)
+        case path(path: StackAction<Path.State, Path.Action>)
         case albumList(action: AlbumListReducer.Action)
     }
     
