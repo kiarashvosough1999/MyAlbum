@@ -1,6 +1,6 @@
 # MyAlbum
 
-This project is a small photo album application which fetch Album and Photos from Api Below:
+This project is a small photo album application which fetch Albums and Photos from Api Below:
 
 1. [Album](https://jsonplaceholder.typicode.com/albums)
 2. [Photos](https://jsonplaceholder.typicode.com/photos)
@@ -8,7 +8,7 @@ This project is a small photo album application which fetch Album and Photos fro
 # Approach
 
 1. Chose `SwiftUI` To develop the UI faster.
-2. Chose `TCA(Composabl-Architecture)`, to get the most out of SwiftUI state-managment and not struggle with handling different states with properties of an ObservableObject.
+2. Chose `TCA(Composable-Architecture)`, to get the most out of SwiftUI state-managment and not struggle with handling different states with properties of an ObservableObject.
 3. Used `Dependencies` to handle dependency managment as it has great adaptibility with TCA and great tools for testing.
 4. Followed TDD to write several Unit Tests for Reducer and UseCases, and UITest.
 
