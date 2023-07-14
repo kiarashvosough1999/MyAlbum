@@ -19,11 +19,10 @@ struct PhotosListView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             photoList(viewStore: viewStore)
-            .animation(.interactiveSpring(), value: viewStore.selectedPhoto)
-            .onFirstAppear {
-                viewStore.send(.onAppear)
-            }
-            .navigationTitle("Photos")
+                .onFirstAppear {
+                    viewStore.send(.onAppear)
+                }
+                .navigationTitle("Photos")
         }
     }
     
@@ -32,7 +31,6 @@ struct PhotosListView: View {
         ScrollableLazyVStack(dataSource: viewStore.showingPhotos) { photo in
             PhotoItemView(model: photo)
         }
-        .opacity(viewStore.selectedPhoto == nil ? 1 : 0.3)
     }
 }
 
