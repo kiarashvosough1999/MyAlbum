@@ -11,7 +11,7 @@ struct PhotoEntity: Identifiable {
     let id: Int
     let albumId: Int
     let title: String
-    let url: String
+    let url: URL
     let thumbnailUrl: URL
 }
 
