@@ -30,16 +30,18 @@ struct SectionizedAlbumList: View {
     }
     
     var body: some View {
-        List {
-            ForEach(albums, id: \.self) { albumByUserId in
-                if let userId = albumByUserId.first?.userId {
-                    Section("User Id: \(userId)") {
-                        ForEach(albumByUserId) { album in
-                            AlbumItemView(model: album.item)
-                                .equatable()
-                        }
+        ScrollableLazyVStack(dataSource: albums, id: \.self) { albumByUserId in
+            if let userId = albumByUserId.first?.userId {
+                VStack {
+                    Text("User Id: \(userId)")
+                        .fillText()
+                    ForEach(albumByUserId) { album in
+                        AlbumItemView(model: album.item)
+                            .equatable()
                     }
                 }
+                .roundedView()
+                .padding()
             }
         }
     }
