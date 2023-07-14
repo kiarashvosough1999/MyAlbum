@@ -14,7 +14,6 @@ struct PhotosListReducer: ReducerProtocol {
         var albumId: Int
         
         @BindingState var photos: [PhotoEntity] = []
-        @BindingState var selectedPhoto: PhotoItemViewModel?
         
         var showingPhotos: [PhotoItemViewModel] {
             photos.map {

@@ -20,13 +20,6 @@ extension URLSession {
         func decode<M>(to modelType: M.Type) throws -> M where M: Decodable {
             try JSONDecoder().decode(modelType, from: data)
         }
-        
-        func printData() {
-            guard
-                let data = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-            else { return }
-            print(data)
-        }
     }
 
     internal func data(for api: any API) async throws -> APIResponse {

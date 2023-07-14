@@ -24,7 +24,8 @@ extension FetchAlbumUseCase: FetchAlbumUseCaseProtocol {
 
     func fetchAlbums() async throws -> [AlbumWithImageEntity] {
         let albums = try await albumRepository.fetchAlbums()
-
+        /// Aggregate the thumbnailUrl with each Album
+        /// thumbnailUrl is selected from Photos whthin the album
         return try await withThrowingTaskGroup(of: AlbumWithImageEntity.self, returning: [AlbumWithImageEntity].self) { group in
             let mapper = AlbumEntityToAlbumWithImageEntityMapper()
             for album in albums {

@@ -37,7 +37,7 @@ extension PhotoRequest: API {
     var query: [String : Any]? {
         switch self {
         case let .photoById(id, albumId):
-            KeyValue(value: id)
+            KeyValue(value: id) // parameter whitout key(As a route)
             KeyValue(key: "albumId", value: albumId)
         default:
             KeyValue.empty

@@ -19,6 +19,7 @@ protocol FetchPhotoUseCaseProtocol {
 struct FetchPhotoUseCase {
     @Dependency(\.photosRepository) private var photosRepository
     
+    /// There are 50 photos in each album, staticaly
     private var photosInAlbumCount: Int { 50 }
 }
 
@@ -30,6 +31,8 @@ extension FetchPhotoUseCase: FetchPhotoUseCaseProtocol {
     }
 
     func fetchPhoto(albumId: Int) async throws -> PhotoEntity {
+        /// To get specific phot based on albumId, we should calculate the photo id which is depen on `albumId`
+        ///  as there are 50 image in each album
         let photoId = photosInAlbumCount * (albumId - 1) + 1
         return try await photosRepository.fetchPhoto(albumId: albumId, photoId: photoId)
     }

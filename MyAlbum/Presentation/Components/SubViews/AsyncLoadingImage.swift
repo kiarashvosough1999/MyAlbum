@@ -29,6 +29,8 @@ struct AsyncLoadingImage: View {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .animation(.spring(), value: phase.image)
+                    .frame(width: width, height: height)
+                    .padding(.all, padding)
             case .success(let image):
                 image
                     .resizable()
