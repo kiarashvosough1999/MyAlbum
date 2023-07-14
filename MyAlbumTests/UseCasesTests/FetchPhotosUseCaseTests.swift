@@ -59,13 +59,12 @@ final class FetchPhotosUseCaseTests: XCTestCase, JSONLoader {
         let fetchedPhoto = try await withDependencies { values in
             values.photosRepository = photosRepository
         } operation: {
-            try await sut.fetchPhoto(albumId: albumId)
+            try await sut.fetchRandomPhoto(albumId: albumId)
         }
 
         XCTAssertNotNil(photosRepository.albumId)
         XCTAssertNotNil(photosRepository.photoId)
         XCTAssertEqual(photosRepository.albumId, albumId)
-        XCTAssertEqual(photosRepository.photoId, photoId)
         XCTAssertEqual(photo, fetchedPhoto)
     }
 
@@ -77,11 +76,10 @@ final class FetchPhotosUseCaseTests: XCTestCase, JSONLoader {
         try await withDependencies { values in
             values.photosRepository = photosRepository
         } operation: {
-            await XCTAssertThrowsError(try await sut.fetchPhoto(albumId: albumId))
+            await XCTAssertThrowsError(try await sut.fetchRandomPhoto(albumId: albumId))
         }
         XCTAssertNotNil(photosRepository.albumId)
         XCTAssertNotNil(photosRepository.photoId)
         XCTAssertEqual(photosRepository.albumId, albumId)
-        XCTAssertEqual(photosRepository.photoId, photoId)
     }
 }

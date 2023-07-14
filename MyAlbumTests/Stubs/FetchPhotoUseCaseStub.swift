@@ -33,7 +33,7 @@ extension FetchPhotoUseCaseStub: FetchPhotoUseCaseProtocol {
         return photos
     }
     
-    func fetchPhoto(albumId: Int) async throws -> MyAlbum.PhotoEntity {
+    func fetchRandomPhoto(albumId: Int) async throws -> MyAlbum.PhotoEntity {
         self.albumId = albumId
         try await Task.sleep(nanoseconds: delayInSeconds * NSEC_PER_SEC)
         if let error { throw error }

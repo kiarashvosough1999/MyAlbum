@@ -30,7 +30,7 @@ extension FetchAlbumUseCase: FetchAlbumUseCaseProtocol {
             let mapper = AlbumEntityToAlbumWithImageEntityMapper()
             for album in albums {
                 group.addTask {
-                    let photo = try await fetchPhotoUseCase.fetchPhoto(albumId: album.id)
+                    let photo = try await fetchPhotoUseCase.fetchRandomPhoto(albumId: album.id)
                     let context = AlbumEntityToAlbumWithImageEntityMapper.Context(thumbnailUrl: photo.thumbnailUrl)
                     return mapper.map(album, context: context)
                 }
