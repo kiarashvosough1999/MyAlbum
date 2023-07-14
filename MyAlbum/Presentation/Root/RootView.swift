@@ -19,15 +19,15 @@ struct RootView: View {
     var body: some View {
         NavigationStackStore(store.scope(state: \.path, action: { .path($0) })) {
             AlbumListView(store: store.scope(state: \.albumList, action: RootReducer.Action.albumList(action:)))
-        } destination: { state in
-//            switch state {
-//            case .showPhotos:
-//                CaseLet(
-//                  state: /RootReducer.Path.State.showPhotos,
-//                  action: RootReducer.Path.Action.showPhotos,
-//                  then: PhotosView.init(store:)
-//                )
-//            }
+        } destination: { (state: Path.State) in
+            switch state {
+            case .showPhotos:
+                CaseLet(
+                    /Path.State.showPhotos(photos:), action: Path.Action.showPhotos(photos:)
+                ) { loggedInStore in
+                    PhotosListView(store: loggedInStore)
+                }
+            }
         }
     }
 }

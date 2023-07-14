@@ -7,11 +7,25 @@
 
 import SwiftUI
 
+// MARK: - ViewModel
+
+struct SectionizedAlbumListViewModel {
+    let userId: Int
+    let item: AlbumItemViewModel
+}
+
+extension SectionizedAlbumListViewModel: Hashable {}
+extension SectionizedAlbumListViewModel: Identifiable {
+    var id: Int { hashValue }
+}
+
+// MARK: - View
+
 struct SectionizedAlbumList: View {
 
-    private let albums: [[AlbumWithImageEntity]]
+    private let albums: [[SectionizedAlbumListViewModel]]
     
-    init(albums: [[AlbumWithImageEntity]]) {
+    init(albums: [[SectionizedAlbumListViewModel]]) {
         self.albums = albums
     }
     
@@ -21,7 +35,7 @@ struct SectionizedAlbumList: View {
                 if let userId = albumByUserId.first?.userId {
                     Section("User Id: \(userId)") {
                         ForEach(albumByUserId) { album in
-                            AlbumItemView(model: album)
+                            AlbumItemView(model: album.item)
                                 .equatable()
                         }
                     }
@@ -30,6 +44,8 @@ struct SectionizedAlbumList: View {
         }
     }
 }
+
+// MARK: - Equatable
 
 extension SectionizedAlbumList: Equatable {
     static func == (lhs: SectionizedAlbumList, rhs: SectionizedAlbumList) -> Bool {

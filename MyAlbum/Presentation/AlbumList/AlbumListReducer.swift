@@ -15,7 +15,7 @@ struct AlbumListReducer: ReducerProtocol {
         @BindingState var filteredUserId: Int?
         var sectionByUsers: Bool = false
 
-        var filteredAlbums: [AlbumWithImageEntity] {
+        private var filteredAlbums: [AlbumWithImageEntity] {
             guard let filteredUserId else { return albums }
             return albums
                 .lazy
@@ -23,11 +23,18 @@ struct AlbumListReducer: ReducerProtocol {
                 .sorted { $0.userId < $1.userId }
         }
         
-        var albumsGroupedByUserId: [[AlbumWithImageEntity]] {
+        var unGroupedAlbums: [AllAlbumListViewModel] {
+            let mapper = AlbumWithImageEntityToAllAlbumListViewModelMapper()
+            return filteredAlbums.map { mapper.map($0) }
+        }
+        
+        var groupedAlbumsByUserId: [[SectionizedAlbumListViewModel]] {
+            let mapper = AlbumWithImageEntityToSectionizedAlbumListViewModel()
             return Dictionary(grouping: filteredAlbums, by: \.userId)
                 .lazy
                 .sorted(by: { $0.key < $1.key })
                 .map { $0.value }
+                .map { $0.map { mapper.map($0) } }
         }
 
         var userIds: [Int] {

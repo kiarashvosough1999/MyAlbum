@@ -20,10 +20,10 @@ struct AlbumListView: View {
         WithViewStore(store) { viewStore in
             Group {
                 if viewStore.sectionByUsers == false {
-                    AllAlbumListView(albums: viewStore.filteredAlbums)
+                    AllAlbumListView(albums: viewStore.unGroupedAlbums)
                         .equatable()
                 } else {
-                    SectionizedAlbumList(albums: viewStore.albumsGroupedByUserId)
+                    SectionizedAlbumList(albums: viewStore.groupedAlbumsByUserId)
                         .equatable()
                 }
             }

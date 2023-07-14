@@ -8,44 +8,35 @@
 import SwiftUI
 import Dependencies
 
+// MARK: - ViewModel
+
+struct AlbumItemViewModel {
+    let title: String
+    let thumbnailUrl: URL
+}
+
+extension AlbumItemViewModel: Hashable {}
+extension AlbumItemViewModel: Identifiable {
+    var id: Int { hashValue }
+}
+
+// MARK: - View
+
 struct AlbumItemView: View {
 
-    @Dependency(\.loadImageRespository) private var loadImageRespository
-    
-    private let model: AlbumWithImageEntity
-    @State private var data: Data?
-    
-    init(model: AlbumWithImageEntity) {
+    private let model: AlbumItemViewModel
+
+    init(model: AlbumItemViewModel) {
         self.model = model
     }
 
     var body: some View {
         HStack(spacing: 16) {
-            image
-            titleText
+            AsyncLoadingImage(url: model.thumbnailUrl, width: 50, height: 50, padding: 0)
+            Text(model.title)
+                .fillText()
         }
-        .animation(.easeInOut, value: data)
-        .roundedView()
-        .task(id: model) {
-            guard data == nil else { return }
-            data = try? await loadImageRespository.loadimageData(model.thumbnailUrl)
-        }
-        .padding(.all, 8)
-    }
-
-    @ViewBuilder
-    private var image: some View {
-        if let data, let image = UIImage(data: data) {
-            Image(uiImage: image)
-                .resizable()
-                .frame(width: 50, height: 50)
-        }
-    }
-
-    private var titleText: some View {
-        Text(model.title)
-            .multilineTextAlignment(.leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        .animation(.easeInOut, value: model)
     }
 }
 
@@ -54,21 +45,6 @@ struct AlbumItemView: View {
 extension AlbumItemView: Equatable {
 
     static func == (lhs: AlbumItemView, rhs: AlbumItemView) -> Bool {
-        lhs.model == rhs.model && lhs.data == rhs.data
-    }
-}
-
-// MARK: - Preview
-
-struct AlbumItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        AlbumItemView(
-            model: AlbumWithImageEntity(
-                id: 0,
-                userId: 0,
-                title: "",
-                thumbnailUrl: URL.applicationDirectory
-            )
-        )
+        lhs.model == rhs.model
     }
 }

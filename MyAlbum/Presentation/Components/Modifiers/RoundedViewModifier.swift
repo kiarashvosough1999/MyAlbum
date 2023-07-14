@@ -22,7 +22,7 @@ private struct RoundedViewModifier: ViewModifier {
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .background {
                 RoundedRectangle(cornerRadius: 16)
-                    .foregroundColor(.secondary.opacity(0.5))
+                    .foregroundColor(.secondary.opacity(0.3))
             }
     }
 }
