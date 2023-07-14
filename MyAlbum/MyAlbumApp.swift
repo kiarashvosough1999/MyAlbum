@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
+import XCTestDynamicOverlay
 
 @main
 struct MyAlbumApp: App {
+
+    private let store = StoreOf<RootReducer>(initialState: RootReducer.State(), reducer: RootReducer())
+
     var body: some Scene {
         WindowGroup {
-            EmptyView()
+            // Prevent UI Startup On Unit Testing
+            if !_XCTIsTesting {
+                RootView(store: store)
+            }
         }
     }
 }

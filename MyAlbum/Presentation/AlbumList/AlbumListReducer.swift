@@ -1,0 +1,76 @@
+//
+//  AlbumListReducer.swift
+//  MyAlbum
+//
+//  Created by Kiarash Vosough on 7/13/23.
+//
+
+import ComposableArchitecture
+import Dependencies
+
+struct AlbumListReducer: ReducerProtocol {
+
+    struct State: Equatable {
+        @BindingState fileprivate var albums: [AlbumWithImageEntity] = []
+        @BindingState var filteredUserId: Int?
+        var sectionByUsers: Bool = false
+
+        private var filteredAlbums: [AlbumWithImageEntity] {
+            guard let filteredUserId else { return albums }
+            return albums
+                .lazy
+                .filter { $0.userId == filteredUserId }
+                .sorted { $0.userId < $1.userId }
+        }
+        
+        /// Data Source used for ungrouped albums
+        var unGroupedAlbums: [AllAlbumListViewModel] {
+            let mapper = AlbumWithImageEntityToAllAlbumListViewModelMapper()
+            return filteredAlbums.map { mapper.map($0) }
+        }
+        
+        /// Data Source used for grouped albums based on userid
+        var groupedAlbumsByUserId: [[SectionizedAlbumListViewModel]] {
+            let mapper = AlbumWithImageEntityToSectionizedAlbumListViewModel()
+            return Dictionary(grouping: filteredAlbums, by: \.userId)
+                .lazy
+                .sorted(by: { $0.key < $1.key })
+                .map { $0.value }
+                .map { $0.map { mapper.map($0) } }
+        }
+
+        /// Data Source used for filtering based on userId
+        var userIds: [Int] {
+            Array(Set(albums.map(\.userId))).sorted()
+        }
+    }
+
+    enum Action: BindableAction {
+        case binding(BindingAction<State>)
+        case onAppear
+        case albumLoaded(albums: [AlbumWithImageEntity])
+        case sectionByUsersChanged
+    }
+
+    @Dependency(\.fetchAlbumUseCase) private var fetchAlbumUseCase
+    
+    var body: some ReducerProtocolOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .onAppear:
+                return .run { send in
+                    let albums = try await fetchAlbumUseCase.fetchAlbums()
+                    await send(.albumLoaded(albums: albums))
+                }
+            case .albumLoaded(let albums):
+                state.albums = albums
+            case .sectionByUsersChanged:
+                state.sectionByUsers.toggle()
+            default:
+                break
+            }
+            return .none
+        }
+        BindingReducer()
+    }
+}
