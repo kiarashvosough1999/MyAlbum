@@ -14,7 +14,12 @@ protocol MapperProtocol {
     func map(_ result: From, context: Context) -> To
     func map(_ result: To, context: Context) -> From
 }
+
 extension MapperProtocol {
     func map(_ result: From, context: Context) -> To { fatalError("Not Implemented")}
     func map(_ result: To, context: Context) -> From { fatalError("Not Implemented")}
+}
+extension MapperProtocol where Context == Void {
+    func map(_ result: From) -> To { map(result, context: ()) }
+    func map(_ result: To) -> From { map(result, context: ()) }
 }
