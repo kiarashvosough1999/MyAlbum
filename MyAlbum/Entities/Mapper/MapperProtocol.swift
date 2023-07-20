@@ -6,7 +6,7 @@
 //
 
 /// Map Two Type with Context
-protocol MapperProtocol {
+protocol MapperProtocol<From, To, Context> {
     
     associatedtype From
     associatedtype To

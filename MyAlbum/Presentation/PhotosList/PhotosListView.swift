@@ -26,14 +26,17 @@ struct PhotosListView: View {
         }
     }
     
+    @ViewBuilder
     @MainActor
     private func photoList(viewStore: ViewStoreOf<PhotosListReducer>) -> some View {
-        ScrollableLazyVStack(dataSource: viewStore.showingPhotos) { photo in
-            PhotoItemView(model: photo)
+        let store = store.scope(state: \.showingPhotos, action: PhotosListReducer.Action.photo(id:action:))
+        StoreScrollableLazyVStack(store: store) { childStore in
+            PhotoItemView(store: childStore)
         }
     }
 }
 
+#if DEBUG
 struct PhotosGridView_Previews: PreviewProvider {
     static var previews: some View {
         PhotosListView(
@@ -44,3 +47,4 @@ struct PhotosGridView_Previews: PreviewProvider {
         )
     }
 }
+#endif
