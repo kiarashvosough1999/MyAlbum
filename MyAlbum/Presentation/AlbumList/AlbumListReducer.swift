@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import Dependencies
+import Foundation
 
 struct AlbumListReducer: ReducerProtocol {
 
@@ -34,7 +35,7 @@ struct AlbumListReducer: ReducerProtocol {
             return filteredAlbums
         }
         
-        /// Data Source used for grouped albums based on userid
+        /// Data Source used for grouped albums based on userId
         fileprivate var groupedAlbumsByUserId: [UserGroupedAlbumEntity] {
             Dictionary(grouping: filteredAlbums, by: \.userId)
                 .lazy
@@ -89,8 +90,15 @@ struct AlbumListReducer: ReducerProtocol {
             case .sectionByUsersChanged:
                 state.sectionByUsers.toggle()
 
-                state.sectionziedAlbumsStates = .init()
-                state.albumsStates = .init()
+                /*
+                 
+                 - For better performance we should empty these states as one of them won't be needed and the other will be updated in next lines.
+                 
+                 - But due to the problem of TCA which send action and there is no state for them in the stateArray which is empty, it create warning in debugger, no crash happen.
+                 
+                 state.sectionziedAlbumsStates = .init()
+                 state.albumsStates = .init()
+                 */
 
                 if state.sectionByUsers {
                     let context = AlbumEntitiesToSectionizedAlbumListReducerStatesMapper.Context(

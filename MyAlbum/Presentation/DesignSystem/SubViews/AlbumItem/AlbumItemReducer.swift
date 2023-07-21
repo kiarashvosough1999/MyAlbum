@@ -32,6 +32,7 @@ struct AlbumItemReducer: ReducerProtocol {
     }
     
     @Dependency(\.fetchPhotoUseCase) private var fetchPhotoUseCase
+    @Dependency(\.thumbnailURLCacheRespository) private var thumbnailURLCacheRespository
     
     var body: some ReducerProtocolOf<Self> {
         Reduce { state, action in
@@ -41,9 +42,20 @@ struct AlbumItemReducer: ReducerProtocol {
                 if state.thumbnailUrl == nil {
                     let albumId = state.albumId
                     return .run { send in
-                        let url = try await fetchPhotoUseCase.fetchRandomPhoto(albumId: albumId)
+                        let url: URL
+                        
+                        // try to find thumbnailURL from cache so we dont have to fetch random photo again
+                        if let thumbnailUrl = try? thumbnailURLCacheRespository
+                            .retreiveThumbnailUrlForAlbum(with: albumId) {
+                            url = thumbnailUrl
+                        } else {
+                            url = try await fetchPhotoUseCase.fetchRandomPhoto(albumId: albumId).thumbnailUrl
+
+                            // cache thumbnailURL to use it again when user reaches this album in list
+                            try? thumbnailURLCacheRespository.cache(albumId: albumId, thumbnailUrl: url)
+                        }
                         guard Task.isCancelled == false else { return }
-                        await send(.thumbnailLoaded(url.thumbnailUrl))
+                        await send(.thumbnailLoaded(url))
                     } catch: { _, _ in }
                     .cancellable(id: Cancellables.thumbnailLoading)
                 }

@@ -47,3 +47,16 @@ extension AlbumItemView: Equatable {
         lhs.store.withState(\.id) == rhs.store.withState(\.id)
     }
 }
+
+#if DEBUG
+struct AlbumItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        AlbumItemView(
+            store: StoreOf<AlbumItemReducer>(
+                initialState: AlbumItemReducer.State(albumId: 1, title: "Some Title"),
+                reducer: AlbumItemReducer()
+            )
+        )
+    }
+}
+#endif

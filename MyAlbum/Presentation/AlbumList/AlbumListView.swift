@@ -10,8 +10,6 @@ import ComposableArchitecture
 
 struct AlbumListView: View {
 
-    private typealias ViewStoreRef = ViewStore<AlbumListReducer.State, AlbumListReducer.Action>
-
     private let store: StoreOf<AlbumListReducer>
     
     init(store: StoreOf<AlbumListReducer>) {
@@ -39,7 +37,7 @@ struct AlbumListView: View {
     }
 
     @ViewBuilder
-    private func buildUnSectionedView(viewStore: ViewStoreRef) -> some View {
+    private func buildUnSectionedView(viewStore: ViewStoreOf<AlbumListReducer>) -> some View {
         let store = store.scope(
             state: \.albumsStates,
             action: AlbumListReducer.Action.album(id:action:)
@@ -49,19 +47,19 @@ struct AlbumListView: View {
     }
 
     @ViewBuilder
-    private func buildSectionzedView(viewStore: ViewStoreRef) -> some View {
+    private func buildSectionzedView(viewStore: ViewStoreOf<AlbumListReducer>) -> some View {
         let store = store.scope(
             state: \.sectionziedAlbumsStates,
             action: AlbumListReducer.Action.section(id:action:)
         )
-        ForEachStore(store) { childStore in
+        StoreScrollableLazyVStack(store: store) { childStore in
             SectionizedAlbumListView(store: childStore)
                 .equatable()
         }
     }
 
     @ToolbarContentBuilder
-    private func buildToolbar(viewStore: ViewStoreRef) -> some ToolbarContent {
+    private func buildToolbar(viewStore: ViewStoreOf<AlbumListReducer>) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Menu {
                 Button(viewStore.sectionByUsers ? "No Section" : "Section By Users") {

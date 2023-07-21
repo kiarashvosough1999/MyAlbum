@@ -12,11 +12,9 @@ import ComposableArchitecture
 
 struct SectionizedAlbumListView: View {
 
-    typealias StoreRef = Store<SectionizedAlbumListReducer.State, SectionizedAlbumListReducer.Action>
+    private let store: StoreOf<SectionizedAlbumListReducer>
 
-    private let store: StoreRef
-
-    init(store: StoreRef) {
+    init(store: StoreOf<SectionizedAlbumListReducer>) {
         self.store = store
     }
 
@@ -26,12 +24,18 @@ struct SectionizedAlbumListView: View {
                 state: \.albumsStates,
                 action: SectionizedAlbumListReducer.Action.album(id:action:)
             )
+
             VStack {
                 Text("User Id: \(viewStore.userId)")
                     .fillText()
-                StoreScrollableLazyVStack(store: store) { childState in
-                    AlbumItemView(store: childState)
-                        .equatable()
+                StoreScrollableLazyVStack(store: store) { childStore in
+                    let state = Path.State.showPhotos(
+                        photos: PhotosListReducer.State(albumId: childStore.withState(\.albumId))
+                    )
+                    NavigationLink(state: state) {
+                        AlbumItemView(store: childStore)
+                            .equatable()
+                    }
                 }
             }
             .roundedView()
@@ -48,8 +52,17 @@ extension SectionizedAlbumListView: Equatable {
     }
 }
 
-//struct SectionizedAlbumList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SectionizedAlbumList(albums: [])
-//    }
-//}
+#if DEBUG
+struct SectionizedAlbumList_Previews: PreviewProvider {
+    static var previews: some View {
+        SectionizedAlbumListView(
+            store: StoreOf<SectionizedAlbumListReducer>(
+                initialState: SectionizedAlbumListReducer.State(
+                    userId: 1,
+                    albumsStates: IdentifiedArrayOf<AlbumItemReducer.State>()),
+                reducer: SectionizedAlbumListReducer()
+            )
+        )
+    }
+}
+#endif

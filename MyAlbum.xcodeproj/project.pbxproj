@@ -67,6 +67,9 @@
 		DEEBC5D52A6137E900C56921 /* AlbumEntitiesToAlbumItemReducerStatesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBC5D42A6137E900C56921 /* AlbumEntitiesToAlbumItemReducerStatesMapper.swift */; };
 		DEEBC5D72A61380300C56921 /* AlbumEntitiesToSectionizedAlbumListReducerStatesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBC5D62A61380300C56921 /* AlbumEntitiesToSectionizedAlbumListReducerStatesMapper.swift */; };
 		DEEBC5D92A61394300C56921 /* ScrollableLazyVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBC5D82A61394300C56921 /* ScrollableLazyVStack.swift */; };
+		DEF391BE2A6ABCC800E4FD49 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF391BD2A6ABCC800E4FD49 /* AppUserDefaults.swift */; };
+		DEF391C02A6ABCFA00E4FD49 /* ThumbnailURLCacheRespositoryPorotocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF391BF2A6ABCFA00E4FD49 /* ThumbnailURLCacheRespositoryPorotocol.swift */; };
+		DEF391C22A6ABD5000E4FD49 /* AppUserDefaults+ThumbnailURLCacheRespositoryPorotocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF391C12A6ABD5000E4FD49 /* AppUserDefaults+ThumbnailURLCacheRespositoryPorotocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +153,9 @@
 		DEEBC5D42A6137E900C56921 /* AlbumEntitiesToAlbumItemReducerStatesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumEntitiesToAlbumItemReducerStatesMapper.swift; sourceTree = "<group>"; };
 		DEEBC5D62A61380300C56921 /* AlbumEntitiesToSectionizedAlbumListReducerStatesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumEntitiesToSectionizedAlbumListReducerStatesMapper.swift; sourceTree = "<group>"; };
 		DEEBC5D82A61394300C56921 /* ScrollableLazyVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableLazyVStack.swift; sourceTree = "<group>"; };
+		DEF391BD2A6ABCC800E4FD49 /* AppUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
+		DEF391BF2A6ABCFA00E4FD49 /* ThumbnailURLCacheRespositoryPorotocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailURLCacheRespositoryPorotocol.swift; sourceTree = "<group>"; };
+		DEF391C12A6ABD5000E4FD49 /* AppUserDefaults+ThumbnailURLCacheRespositoryPorotocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppUserDefaults+ThumbnailURLCacheRespositoryPorotocol.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,7 @@
 		DE03696F2A60194A000A2FB8 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DEF391BC2A6ABC9800E4FD49 /* UserDefaults */,
 				DE0369702A60194E000A2FB8 /* Network */,
 			);
 			path = Data;
@@ -427,6 +434,7 @@
 			children = (
 				DEA140B32A60253E00E555C7 /* AlbumRepositoryProtocol.swift */,
 				DEA140B52A60257100E555C7 /* PhotosRepositoryProtocol.swift */,
+				DEF391BF2A6ABCFA00E4FD49 /* ThumbnailURLCacheRespositoryPorotocol.swift */,
 			);
 			path = RepositoryProtocols;
 			sourceTree = "<group>";
@@ -509,6 +517,15 @@
 				DED624BC2A69BC7700D7603E /* SectionizedAlbumListReducer.swift */,
 			);
 			path = SectionizedAlbumList;
+			sourceTree = "<group>";
+		};
+		DEF391BC2A6ABC9800E4FD49 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				DEF391BD2A6ABCC800E4FD49 /* AppUserDefaults.swift */,
+				DEF391C12A6ABD5000E4FD49 /* AppUserDefaults+ThumbnailURLCacheRespositoryPorotocol.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -653,6 +670,7 @@
 				DEEBC5D32A6133AF00C56921 /* FillTextModifier.swift in Sources */,
 				DE0369792A60195E000A2FB8 /* StatusCode.swift in Sources */,
 				DED624BA2A69B07F00D7603E /* AlbumItemReducer.swift in Sources */,
+				DEF391C02A6ABCFA00E4FD49 /* ThumbnailURLCacheRespositoryPorotocol.swift in Sources */,
 				DEA140BA2A6028E400E555C7 /* NetworkServices+PhotosRepositoryProtocol.swift in Sources */,
 				DEA140A92A60233A00E555C7 /* AlbumEntity.swift in Sources */,
 				DE03697E2A60195E000A2FB8 /* NetworkError.swift in Sources */,
@@ -663,6 +681,7 @@
 				DEA140B62A60257100E555C7 /* PhotosRepositoryProtocol.swift in Sources */,
 				DEA140B42A60253E00E555C7 /* AlbumRepositoryProtocol.swift in Sources */,
 				DE6537D02A609115005A66AE /* FirstAppear.swift in Sources */,
+				DEF391BE2A6ABCC800E4FD49 /* AppUserDefaults.swift in Sources */,
 				DE03697B2A60195E000A2FB8 /* URLSession++APITask.swift in Sources */,
 				DE03697C2A60195E000A2FB8 /* HTTPMethod.swift in Sources */,
 				DE1E12D92A69D91400AA12CB /* PhotoEntityToPhotoItemReducerStatesMapper.swift in Sources */,
@@ -690,6 +709,7 @@
 				DEA140B82A60265D00E555C7 /* NetworkServices+AlbumRepositoryProtocol.swift in Sources */,
 				DE1959762A60C567007CB4CD /* PhotosListView.swift in Sources */,
 				DE38241E2A60802D007FEB9D /* FetchPhotoUseCase.swift in Sources */,
+				DEF391C22A6ABD5000E4FD49 /* AppUserDefaults+ThumbnailURLCacheRespositoryPorotocol.swift in Sources */,
 				DE1959742A60C55E007CB4CD /* PhotosListReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

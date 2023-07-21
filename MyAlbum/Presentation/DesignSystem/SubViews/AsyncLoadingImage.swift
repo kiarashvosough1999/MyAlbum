@@ -57,3 +57,11 @@ extension AsyncLoadingImage: Equatable {
         lhs.padding == rhs.padding
     }
 }
+
+#if DEBUG
+struct AsyncLoadingImage_Previews: PreviewProvider {
+    static var previews: some View {
+        AsyncLoadingImage(url: URL(string: "https://via.placeholder.com/600/771796")!)
+    }
+}
+#endif

@@ -12,11 +12,11 @@ import ComposableArchitecture
 
 struct PhotoItemView: View {
 
-    typealias ViewStoreRef = ViewStore<PhotoItemReducer.State, PhotoItemReducer.Action>
+    typealias ViewStoreRef = ViewStoreOf<PhotoItemReducer>
 
-    private let store: Store<PhotoItemReducer.State, PhotoItemReducer.Action>
+    private let store: StoreOf<PhotoItemReducer>
 
-    init(store: Store<PhotoItemReducer.State, PhotoItemReducer.Action>) {
+    init(store: StoreOf<PhotoItemReducer>) {
         self.store = store
     }
 
@@ -63,3 +63,21 @@ extension PhotoItemView: Equatable {
         lhs.store.withState(\.title) == rhs.store.withState(\.title)
     }
 }
+
+#if DEBUG
+struct PhotoItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        PhotoItemView(
+            store: StoreOf<PhotoItemReducer>(
+                initialState: PhotoItemReducer.State(
+                    id: 1,
+                    thumbnailImageUrl: URL(string: "https://via.placeholder.com/600/771796")!,
+                    originalImageUrl: URL(string: "https://via.placeholder.com/600/771796")!,
+                    title: "Some Title"
+                ),
+                reducer: PhotoItemReducer()
+            )
+        )
+    }
+}
+#endif
