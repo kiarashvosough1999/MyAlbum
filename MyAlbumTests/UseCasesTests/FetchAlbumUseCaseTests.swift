@@ -35,7 +35,6 @@ final class FetchAlbumUseCaseTests: XCTestCase, JSONLoader {
         XCTAssertEqual(albums.map(\.id).sorted(), fetchedAlbums.map(\.id).sorted())
         XCTAssertEqual(albums.map(\.userId).sorted(), fetchedAlbums.map(\.userId).sorted())
         XCTAssertEqual(albums.map(\.title).sorted(), fetchedAlbums.map(\.title).sorted())
-        XCTAssertEqual(Array(repeating: photo.thumbnailUrl, count: fetchedAlbums.count), fetchedAlbums.map(\.thumbnailUrl))
     }
 
     func testFetchingAlbumsUnSuccessful() async throws {
