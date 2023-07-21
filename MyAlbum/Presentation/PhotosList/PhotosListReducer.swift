@@ -11,25 +11,31 @@ import Dependencies
 struct PhotosListReducer: ReducerProtocol {
 
     struct State: Equatable {
-        var albumId: Int
-        
-        @BindingState var photos: [PhotoEntity] = []
-        
-        var showingPhotos: [PhotoItemViewModel] {
-            photos.map {
-                PhotoItemViewModel(thumbnailImageUrl: $0.thumbnailUrl, originalImageUrl: $0.url, title: $0.title)
-            }
-        }
+        let albumId: Int
+
+        @BindingState fileprivate var photos: [PhotoEntity] = []
+        var showingPhotos: IdentifiedArrayOf<PhotoItemReducer.State> = .init()
     }
 
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case onAppear
         case photosLoaded(photos: [PhotoEntity])
+        case photo(id: PhotoItemReducer.State.ID, action: PhotoItemReducer.Action)
     }
 
+    // MARK: - Depedency
+
     @Dependency(\.fetchPhotoUseCase) private var fetchPhotoUseCase
+
+    // MARK: - Mapper
     
+    private var photoEntityStatesMaper: PhotoEntityToPhotoItemReducerStatesMapper {
+        PhotoEntityToPhotoItemReducerStatesMapper()
+    }
+    
+    // MARK: - Reducer
+
     var body: some ReducerProtocolOf<Self> {
         Reduce { state, action in
             switch action {
@@ -41,10 +47,14 @@ struct PhotosListReducer: ReducerProtocol {
                 }
             case .photosLoaded(let photos):
                 state.photos = photos
+                state.showingPhotos = photoEntityStatesMaper.map(photos)
             default:
                 break
             }
             return .none
+        }
+        .forEach(\.showingPhotos, action: /Action.photo) {
+            PhotoItemReducer()
         }
         BindingReducer()
     }

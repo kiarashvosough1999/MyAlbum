@@ -14,42 +14,33 @@ typealias TestStoreOf<R: ReducerProtocol> = TestStore<R.State, R.Action, R.State
 
 final class AlbumListReducerTests: XCTestCase, JSONLoader {
 
-    private var store: TestStoreOf<AlbumListReducer>!
+    private var sut: TestStoreOf<AlbumListReducer>!
 
     override func setUpWithError() throws {
-        store = TestStore(initialState: AlbumListReducer.State()) {
+        sut = TestStore(initialState: AlbumListReducer.State()) {
             AlbumListReducer()
         }
-        store.exhaustivity = .off
+        sut.exhaustivity = .off
     }
 
     override func tearDownWithError() throws {
-        store = nil
+        sut = nil
     }
     
     @MainActor
     func testOnAppear() async throws {
         let albums = try loadAlbums()
         let userIds = Array(Set(albums.map(\.userId))).sorted()
-        let photo = try loadPhotos().first!
-        let url = photo.thumbnailUrl
-
-        let albumEntityToAlbumWithImageEntityMapper = AlbumEntityToAlbumWithImageEntityMapper()
-        let context = AlbumEntityToAlbumWithImageEntityMapper.Context(thumbnailUrl: url)
-        let albumsWithImage = albums.map { albumEntityToAlbumWithImageEntityMapper.map($0, context: context) }
+        let albumStatesMapper = AlbumEntitiesToAlbumItemReducerStatesMapper()
         
-        let albumWithImageEntityToAllAlbumListViewModelMapper = AlbumWithImageEntityToAllAlbumListViewModelMapper()
-        let viewmodel = albumsWithImage.map { albumWithImageEntityToAllAlbumListViewModelMapper.map($0) }
-        
-        await store.withDependencies { values in
-            values.fetchAlbumUseCase = FetchAlbumUseCaseStub(albums: albumsWithImage)
-            values.fetchPhotoUseCase = FetchPhotoUseCaseStub(photo: photo)
+        await sut.withDependencies { values in
+            values.fetchAlbumUseCase = FetchAlbumUseCaseStub(albums: albums)
         } operation: {
-            await store.send(.onAppear)
-            await store.finish(timeout: 10*NSEC_PER_SEC)
-            await store.receive(/AlbumListReducer.Action.albumLoaded(albums:))
-            XCTAssertEqual(store.state.unGroupedAlbums, viewmodel)
-            XCTAssertEqual(store.state.userIds, userIds)
+            await sut.send(.onAppear)
+            await sut.finish(timeout: 10*NSEC_PER_SEC)
+            await sut.receive(/AlbumListReducer.Action.albumLoaded(albums:))
+            XCTAssertEqual(sut.state.albumsStates, albumStatesMapper.map(albums))
+            XCTAssertEqual(sut.state.userIds, userIds)
         }
     }
 
@@ -60,22 +51,16 @@ final class AlbumListReducerTests: XCTestCase, JSONLoader {
         let url = photo.thumbnailUrl
         let userId = Array(Set(albums.map(\.userId))).first!
 
-        let mapper = AlbumEntityToAlbumWithImageEntityMapper()
-        let context = AlbumEntityToAlbumWithImageEntityMapper.Context(thumbnailUrl: url)
-        let albumsWithImage = albums.map { mapper.map($0, context: context) }
-        let filteredAlbumsWithImage = albumsWithImage.filter { $0.userId == userId }
-        
-        let albumWithImageEntityToAllAlbumListViewModelMapper = AlbumWithImageEntityToAllAlbumListViewModelMapper()
-        let viewmodel = filteredAlbumsWithImage.map { albumWithImageEntityToAllAlbumListViewModelMapper.map($0) }
+        let albumStatesMapper = AlbumEntitiesToAlbumItemReducerStatesMapper()
+        let filteredAlbums = albums.filter { $0.userId == userId }
 
-        await store.withDependencies { values in
-            values.fetchAlbumUseCase = FetchAlbumUseCaseStub(albums: albumsWithImage)
-            values.fetchPhotoUseCase = FetchPhotoUseCaseStub(photo: photo)
+        await sut.withDependencies { values in
+            values.fetchAlbumUseCase = FetchAlbumUseCaseStub(albums: filteredAlbums)
         } operation: {
-            await store.send(.onAppear)
-            await store.send(.set(\.$filteredUserId, userId))
-            await store.finish(timeout: 10*NSEC_PER_SEC)
-            XCTAssertEqual(store.state.unGroupedAlbums, viewmodel)
+            await sut.send(.onAppear)
+            await sut.send(.set(\.$filteredUserId, userId))
+            await sut.finish(timeout: 10*NSEC_PER_SEC)
+            XCTAssertEqual(sut.state.albumsStates, albumStatesMapper.map(filteredAlbums))
         }
     }
 
@@ -83,18 +68,18 @@ final class AlbumListReducerTests: XCTestCase, JSONLoader {
     func testSectionByUsersTrue() async throws {
         let sectionByUsers = true
 
-        await store.send(.sectionByUsersChanged)
-        await store.finish(timeout: 10*NSEC_PER_SEC)
+        await sut.send(.sectionByUsersChanged)
+        await sut.finish(timeout: 10*NSEC_PER_SEC)
 
-        XCTAssertEqual(store.state.sectionByUsers, sectionByUsers)
+        XCTAssertEqual(sut.state.sectionByUsers, sectionByUsers)
     }
     
     @MainActor
     func testSectionByUsersFalse() async throws {
         let sectionByUsers = false
 
-        await store.finish(timeout: 10*NSEC_PER_SEC)
+        await sut.finish(timeout: 10*NSEC_PER_SEC)
 
-        XCTAssertEqual(store.state.sectionByUsers, sectionByUsers)
+        XCTAssertEqual(sut.state.sectionByUsers, sectionByUsers)
     }
 }

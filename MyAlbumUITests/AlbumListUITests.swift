@@ -37,8 +37,8 @@ final class AlbumListUITests: XCTestCase {
     
     func testImages() throws {
         let element = app.images.element
-        XCTAssert(app.images.count > 4)
         XCTAssert(element.waitForExistence(timeout: 5))
+        XCTAssert(app.images.count > 4)
         XCTAssert(element.exists)
     }
     

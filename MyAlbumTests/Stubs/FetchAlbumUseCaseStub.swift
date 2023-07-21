@@ -11,12 +11,12 @@ import Foundation
 final class FetchAlbumUseCaseStub {
     private let error: Error?
     private let delayInSeconds: UInt64
-    private let albums: [MyAlbum.AlbumWithImageEntity]
+    private let albums: [MyAlbum.AlbumEntity]
     
     init(
         error: Error? = nil,
         delayInSeconds: UInt64 = 0,
-        albums: [MyAlbum.AlbumWithImageEntity] = []
+        albums: [MyAlbum.AlbumEntity] = []
     ) {
         self.error = error
         self.delayInSeconds = delayInSeconds
@@ -25,7 +25,7 @@ final class FetchAlbumUseCaseStub {
 }
 
 extension FetchAlbumUseCaseStub: FetchAlbumUseCaseProtocol {
-    func fetchAlbums() async throws -> [MyAlbum.AlbumWithImageEntity] {
+    func fetchAlbums() async throws -> [MyAlbum.AlbumEntity] {
         try await Task.sleep(nanoseconds: delayInSeconds * NSEC_PER_SEC)
         if let error { throw error }
         return albums
